@@ -69,7 +69,7 @@ S: fe08e1e2bed3f1a31c9722c0bf1d63da31c42b8f 127.0.0.1:6382
 ``` 
 这样集群就搭建完毕
 
-![redis集群操作](../png/redis集群操作.jpg)
+![redis集群操作](../png/redis集群操作.png)
 
 从上述所看，可以发现当key不在本机上时会路由到该key的redis上并获取结果。
 
