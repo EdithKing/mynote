@@ -92,7 +92,72 @@ Zookeeper可以填多个参数内容
 	* createMode：创建模式，比如持久节点，有序，临时
 	* cb： 包括回调函数的对象
 	* ctx：上下文对象(异步回调时会传递给callback，方便出错时重新调用)
-
+```
+	public void createPath() throws KeeperException, InterruptedException {
+		ZooKeeper zooKeeper = getZookeeper();
+		//路径必须以/开头
+		zooKeeper.create("/hello","hello world".getBytes(),Ids.CREATOR_ALL_ACL,CreateMode.PERSISTENT);
+	}
+	public void createPath2() throws KeeperException, InterruptedException {
+		ZooKeeper zooKeeper = getZookeeper();
+		//路径必须以/开头
+		zooKeeper.create("/hello1","hello world".getBytes(),Ids.CREATOR_ALL_ACL,CreateMode.PERSISTENT,(StringCallback) new CreatePathCallBack(),"上下文内容");
+	}
+	/**
+	 * StatCallback ：状态异步回调接口
+	 * DataCallback ：数据异步回调接口
+	 * ACLCallback ： acl权限异步回调接口
+	 * ChildrenCallback ： 孩子节点异步回调接口
+	 * StringCallback ：字符类型回调接口
+	 * VoidCallback ：无返回值回调接口
+	 */
+	class CreatePathCallBack implements StringCallback{
+		public void processResult(int rc, String path, Object ctx, String name) {
+			System.out.println("rc :" + rc + " path : " + path + " ctx : " + ctx + " name : " + name);
+		}
+	}
+```
+4. 判断节点是否存在
+```
+	public Stat exists() throws Exception {
+		ZooKeeper zooKeeper = getZookeeper2();
+		Stat stat = zooKeeper.exists("/hello1", null);
+		return stat;
+	}
+```
+5. 删除节点
+```
+	public void delete() throws Exception {
+		ZooKeeper zooKeeper = getZookeeper2();
+		zooKeeper.delete("/hello1", -1);
+	}
+```
+6. 获取节点数据
+```
+	public String getData() throws Exception {
+		ZooKeeper zooKeeper = getZookeeper2();
+		byte[] bytes = zooKeeper.getData("/hello", false, null);
+		String value = String.valueOf(bytes);
+		return value;
+	}
+```
+7. 修改节点数据
+```
+	public Stat setData() throws Exception {
+		ZooKeeper zooKeeper = getZookeeper2();
+		// 传入版本号，-1为忽略版本号
+		Stat stat = zooKeeper.setData("/hello", "myname".getBytes(), -1);
+		return stat;
+	}
+```
+8. 获取孩子节点 
+```
+	public List<String> getChildren() throws Exception {
+		ZooKeeper zooKeeper = getZookeeper2();
+		List<String> lists = zooKeeper.getChildren("/hello", false);
+		return lists;
+	}
+```
 
 
 
