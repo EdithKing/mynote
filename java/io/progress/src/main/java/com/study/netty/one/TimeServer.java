@@ -1,6 +1,8 @@
 package com.study.netty.one;
 
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
@@ -8,6 +10,9 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.DelimiterBasedFrameDecoder;
+import io.netty.handler.codec.LineBasedFrameDecoder;
+import io.netty.handler.codec.string.StringDecoder;
 
 public class TimeServer {
 
@@ -32,6 +37,11 @@ public class TimeServer {
 	public class ChildChannelHandler extends ChannelInitializer<SocketChannel> {
 		@Override
 		protected void initChannel(SocketChannel ch) throws Exception {
+			ByteBuf delimiter = Unpooled.copiedBuffer("$_".getBytes());
+//			使用LineBasedFrameDecoder解决粘包拆包，分割的字符串为\r\n或者\n
+//			ch.pipeline().addLast(new LineBasedFrameDecoder(1024));
+			ch.pipeline().addLast(new DelimiterBasedFrameDecoder(1024, delimiter));
+			ch.pipeline().addLast(new StringDecoder());
 			ch.pipeline().addLast(new TimeServerHandler());
 		}
 	}
