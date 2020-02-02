@@ -110,10 +110,30 @@ cat 文件名 | docker import - 镜像名称：tag标签（版本名称）
 * ONBUILD：延迟构建的命令
 
 
+### Docker-compose
+> Compose 是用于定义和运行多容器 Docker 应用程序的工具。通过 Compose，您可以使用 YML 文件来配置应用程序需要的所有服务。然后，使用一个命令，就可以从 YML 文件配置中创建并启动所有服务。
+
+Compose 使用的三个步骤：
+* 使用 Dockerfile 定义应用程序的环境。
+* 使用 docker-compose.yml 定义构成应用程序的服务，这样它们可以在隔离环境中一起运行。
+* 最后，执行 docker-compose up 命令来启动并运行整个应用程序。
 
 
+### docker-machine
+> Docker Machine 是一种可以让您在虚拟主机上安装 Docker 的工具，并可以使用 docker-machine 命令来管理主机。
 
 
+### Swarm 集群管理
+> Docker Swarm 是 Docker 的集群管理工具。它将 Docker 主机池转变为单个虚拟 Docker 主机。 Docker Swarm 提供了标准的 Docker API，所有任何已经与 Docker 守护程序通信的工具都可以使用 Swarm 轻松地扩展到多个主机。
+
+<p>
+
+> ##### 原理：
+> 如下图所示，swarm 集群由管理节点（manager）和工作节点（work node）构成。
+> * swarm mananger：负责整个集群的管理工作包括集群配置、服务管理等所有跟集群有关的工作。
+> * work node：即图中的 available node，主要负责运行相应的服务来执行任务（task）。
+
+![swarm集群管理](../swarm集群管理.png)
 
 
 
