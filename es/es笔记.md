@@ -1,11 +1,30 @@
 
 
+### 配置
+
+* elasticsearch.yml
+* jvm.option:
+  * ES_JAVA_OPTS:
+  * xms:
+  * xmx:
+  * 8 : -xms : jdk版本为8时适用
+  * 8 - ：-xms：jdk为8或者8以上适用
+  * 8-9：-xms：jdk为8，9之间适用
+
+* log4j.properties
+
+### 建索引
+
+* mapping：
+  * properties
+    * 字段名称
+      * type：类型
+
 ### 
 
 * 检查集群健康 :_cat/health?v
 
 * 检查索引分片信息 :_cat/indices?v
-* 
 
 ### 增
 
@@ -50,5 +69,18 @@
   * macth_all： 全部
   * match ：相当于where
   * sort：排序
+* aggs：指标
+  * avg 平均值 
+    * missing：缺省时初始值为
+    * script：动态  
+  * cardinality:统计
+  * extended_stats:标准方差
+    * sigma： 控制应该显示多少个与均值+/-的标准偏差
+    * missing：
+    * script：
+  * max：最大值
+  * min：最小值
+  * sum：
 * form：从某位置开始
 * size ：查的个数
+

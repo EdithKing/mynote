@@ -21,3 +21,22 @@
   *  StringRedisSerializer
   *  GenericJackson2JsonRedisSerializer
   *  Jackson2JsonRedisSerializer
+
+```java
+	// 使用Jackson2JsonRedisSerializer作为序列化方式	
+	@Bean
+	public RedisTemplate<String, Object> getRedisTemplate(RedisConnectionFactory redisConnectionFactory){
+		RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+		Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
+		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.setVisibility(PropertyAccessor.ALL,JsonAutoDetect.Visibility.ANY);
+		jackson2JsonRedisSerializer.setObjectMapper(objectMapper);
+		redisTemplate.setConnectionFactory(redisConnectionFactory);
+		redisTemplate.setKeySerializer(jackson2JsonRedisSerializer);
+		redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
+		redisTemplate.setHashKeySerializer(jackson2JsonRedisSerializer);
+		redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
+		return redisTemplate;
+	}
+```
+
