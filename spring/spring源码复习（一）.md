@@ -16,13 +16,13 @@ dubbo采用spring自定义标签实现xml功能
 
     * 格式	命名空间 = 处理这个标签的类（需要继承NamespaceHandlerSupport类 即命名空间处理器）
 
-    ![spring-handles](img\spring-handles.png)
+    ![spring-handles](img/spring-handles.png)
 
   * spring.schemas 配置的是xsd文件所在的位置 （spring启动会加载）
 
     * 格式： xsd的命名空间 = xsd文件所在
 
-    ![image-20210608000854484](img\spring-schema.png)
+    ![image-20210608000854484](img/spring-schema.png)
 
   * 提供命名空间解析器 需要实现 BeanDefinitionParser（解析Element标签内容生成对应的beandefinition对象（spring存储标签元素内容都是以beandefinition对象存储））
 
