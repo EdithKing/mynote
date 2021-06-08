@@ -571,12 +571,6 @@ spring解析xml文件的流程，以及自定义标签的内容就完成了，�
 
 
 
-笔记：
-
-1. 手写一个xml文档的解析方法，并且生成一个简易的BeanDefinition的对象的过程。
-2. 手写一个spring自定义标签
-3. ThreadLocal的多线程使用
-
 
 
 
