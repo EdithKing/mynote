@@ -194,7 +194,7 @@ dubbo采用spring自定义标签实现xml功能
 
 5. 结果
 
-![结果](img\result.png)
+![结果](img/result.png)
 
 ---
 
